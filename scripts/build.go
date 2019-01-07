@@ -1,12 +1,13 @@
-package main
+package gpm
 
 import (
 	"fmt"
-	"github.com/zlepper/gpm/internal"
 	"log"
 	"os"
 	"os/exec"
 	"sync"
+
+	"github.com/gostones/gpm/internal"
 )
 
 type configuration struct {
@@ -69,7 +70,7 @@ func main() {
 					"build",
 					"-o",
 					fmt.Sprintf("build/gpm-%s-%s", internal.VERSION, conf.Extension),
-					"github.com/zlepper/gpm",
+					"github.com/gostones/gpm",
 				},
 				Env: append(
 					os.Environ(),

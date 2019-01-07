@@ -3,10 +3,13 @@ package main
 import (
 	"context"
 	"flag"
-	"github.com/zlepper/gpm/internal"
 	"log"
 	"os"
 	"os/signal"
+
+	"github.com/gostones/gpm"
+
+	"github.com/gostones/gpm/internal"
 )
 
 func main() {
@@ -16,7 +19,7 @@ func main() {
 	flag.Parse()
 
 	log.Printf("GPM version %s\n", internal.VERSION)
-	pm := NewProcessManager()
+	pm := gpm.NewProcessManager()
 	err = pm.ParseConfigFile(*configPath)
 	if err != nil {
 		log.Println("Could not parse config file", err)
@@ -34,6 +37,7 @@ func main() {
 
 	select {
 	case err = <-done:
+		cancel()
 		if err != nil {
 			log.Println("Error while running processes: ", err)
 		} else {
