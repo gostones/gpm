@@ -39,6 +39,17 @@ func (p *ProcessManager) ParseConfigFile(pathToConfigFile string) error {
 	return p.BuildProcesses(processes)
 }
 
+func (p *ProcessManager) ParseConfig(data string) error {
+	var processes []*processJson
+	err := json.Unmarshal([]byte(data), &processes)
+	if err != nil {
+		return err
+	}
+
+	log.Println(processes)
+	return p.BuildProcesses(processes)
+}
+
 // Tokenises the given string as command line arguments
 func Tokenize(s string) (tokens []string) {
 	// The token that we are currently building
